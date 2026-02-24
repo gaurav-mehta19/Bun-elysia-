@@ -6,7 +6,7 @@ const ItemSchema = t.Object({
     id: t.String(),
     name: t.String(),
     price: t.Number(),
-    description: t.Optional(t.String()) // Optional!
+    description: t.Optional(t.String()) 
 });
 
 // For creating, we don't expect the user to pass the `id`, so we Omit it
