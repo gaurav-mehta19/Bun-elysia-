@@ -17,32 +17,19 @@ const UpdateItemSchema = t.Partial(CreateItemSchema);
 export const itemRoutes = new Elysia()
     .get("/", controller.getItems, {
         // We tell Swagger that this returns an Array of items!
-        response: t.Array(ItemSchema),
-        detail: {
-            tags: ['Items'],
-            summary: 'Get all items',
-            description: 'Returns a list of all items in the database'
-        }
+        response: t.Array(ItemSchema)
     })
     .post("/", controller.createItem, {
         // Elysia will throw a 400 Bad Request if the JSON body doesn't perfectly match this
         body: CreateItemSchema,
         // When we create an item, we return the newly minted full object (which includes the new ID)
-        response: ItemSchema,
-        detail: {
-            tags: ['Items'],
-            summary: 'Create a new item',
-        }
+        response: ItemSchema
     })
     .get("/:id", controller.getItem, {
         params: t.Object({
             id: t.String({ description: "The ID of the item" })
         }),
-        response: ItemSchema,
-        detail: {
-            tags: ['Items'],
-            summary: 'Get a specific item by ID',
-        }
+        response: ItemSchema
     })
     .put("/:id", controller.updateItem, {
         params: t.Object({
@@ -50,19 +37,11 @@ export const itemRoutes = new Elysia()
         }),
         // Ensure they send valid fields to update
         body: UpdateItemSchema,
-        response: ItemSchema,
-        detail: {
-            tags: ['Items'],
-            summary: 'Update a specific item by ID',
-        }
+        response: ItemSchema
     })
     .delete("/:id", controller.deleteItem, {
         params: t.Object({
             id: t.String()
         }),
-        response: ItemSchema,
-        detail: {
-            tags: ['Items'],
-            summary: 'Delete a specific item by ID',
-        }
+        response: ItemSchema
     });
